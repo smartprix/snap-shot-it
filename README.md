@@ -272,7 +272,7 @@ lots of other ones, blog posts and slides on this topic.
 * Blog post [Picking snapshot library](https://glebbahmutov.com/blog/picking-snapshot-library/)
 * Slides [Snapshot testing the hard way](https://slides.com/bahmutov/snapshot-testing-the-hard-way)
 
-[snap-shot-core]: https://github.com/bahmutov/snap-shot-core
+[snap-shot-core]: https://github.com/smartprix/snap-shot-core
 
 ### Small print
 

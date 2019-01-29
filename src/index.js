@@ -1,13 +1,17 @@
 'use strict'
 
 const debug = require('debug')('snap-shot-it')
-const { core, restore, prune } = require('snap-shot-core')
+const { core, restore, prune } = require('@smpx/snap-shot-core')
 const compare = require('snap-shot-compare')
 const { isDataDriven, dataDriven } = require('@bahmutov/data-driven')
 const { isNamedSnapshotArguments } = require('./named-snapshots')
 const R = require('ramda')
 const { hasOnly, hasFailed } = require('has-only')
 const pluralize = require('pluralize')
+const path = require('path')
+
+const packageFile = require(path.join(process.cwd(), 'package.json'))
+const config = packageFile['snap-shot-it'] || {}
 
 debug('loading snap-shot-it')
 const EXTENSION = '.js'
@@ -18,7 +22,10 @@ function _pruneSnapshots () {
   debug('pruning snapshots')
   debug('seen %s', pluralize('spec', seenSpecs.length, true))
   debug(seenSpecs)
-  prune({ tests: seenSpecs, ext: EXTENSION })
+  prune(
+    { tests: seenSpecs, ext: EXTENSION },
+    { useRelativePath: Boolean(config.useRelativePath) }
+  )
 
   // eslint-disable-next-line immutable/no-mutation
   seenSpecs.length = 0
@@ -122,7 +129,8 @@ function snapshot (value) {
     show: Boolean(process.env.SNAPSHOT_SHOW),
     dryRun: Boolean(process.env.SNAPSHOT_DRY),
     update: Boolean(process.env.SNAPSHOT_UPDATE),
-    ci: Boolean(process.env.CI)
+    ci: Boolean(process.env.CI),
+    useRelativePath: Boolean(config.useRelativePath)
   }
   const snap = {
     what: value,

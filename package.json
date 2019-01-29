@@ -1,9 +1,9 @@
 {
-  "name": "snap-shot-it",
+  "name": "@smpx/snap-shot-it",
   "description": "Smarter snapshot utility for Mocha and BDD test runners",
-  "version": "0.0.0-development",
+  "version": "6.2.9",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
-  "bugs": "https://github.com/bahmutov/snap-shot-it/issues",
+  "bugs": "https://github.com/smartprix/snap-shot-it/issues",
   "types": "src/index.d.ts",
   "config": {
     "pre-git": {
@@ -52,7 +52,7 @@
     "src/*.ts",
     "!src/*spec.js"
   ],
-  "homepage": "https://github.com/bahmutov/snap-shot-it#readme",
+  "homepage": "https://github.com/smartprix/snap-shot-it#readme",
   "keywords": [
     "bdd",
     "mocha",
@@ -65,11 +65,12 @@
   "license": "MIT",
   "main": "src/",
   "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
+    "registry": "http://registry.npmjs.org/",
+    "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bahmutov/snap-shot-it.git"
+    "url": "https://github.com/smartprix/snap-shot-it.git"
   },
   "scripts": {
     "ban": "ban",

@@ -1,5 +1,3 @@
-[![TODO board](https://imdone.io/api/1.0/projects/5b1adecc1883d42a1fbf805d/badge)](https://imdone.io/app#/board/bahmutov/snap-shot-it)
-
 # snap-shot-it
 
 > Smarter snapshot utility for Mocha and BDD test runners + data-driven testing!
@@ -19,7 +17,7 @@ done in [snap-shot][snap-shot]); it should work in transpiled code.
 
 [snapshot testing]: https://glebbahmutov.com/blog/snapshot-testing/
 
-This package uses [snap-shot-compare](https://github.com/bahmutov/snap-shot-compare)
+This package uses [snap-shot-compare](https://github.com/smartprix/snap-shot-compare)
 to display object and text difference intelligently.
 
 This function also includes [data-driven][data-driven] testing mode,
@@ -34,7 +32,7 @@ section below.
 Requires [Node](https://nodejs.org/en/) version 4 or above.
 
 ```sh
-npm install --save-dev snap-shot-it
+npm install --save-dev @smpx/snap-shot-it
 ```
 
 ## Use
@@ -42,7 +40,7 @@ npm install --save-dev snap-shot-it
 Example from [spec.js](src/spec.js)
 
 ```js
-const snapshot = require('snap-shot-it')
+const snapshot = require('@smpx/snap-shot-it')
 describe('example', () => {
   it('works', () => {
     snapshot(add(10, 20))
@@ -66,7 +64,7 @@ exports['example works 3'] = 42
 Suppose you change the resolved value from `42` to `80`
 
 ```js
-const snapshot = require('snap-shot-it')
+const snapshot = require('@smpx/snap-shot-it')
 describe('example', () => {
   it('works', () => {
     snapshot(add(10, 20))
@@ -85,6 +83,35 @@ The test will fail
 
 The error message should intelligently handle numbers, objects, arrays,
 multi-line text, etc.
+
+
+## Config
+This is read from package.json. See below for format fo config.
+
+```json
+{
+  "snap-shot-it": {
+    "useRelativePath": true,
+    "extension": ".js.snap"
+  }
+}
+```
+
+This is how it is used along with env vars to send to [snap-shot-core][snap-shot-core]
+```js
+const config = require(process.cwd() + '/package.json')['snap-shot-it'] || {}
+
+const EXTENSION = config.extension || '.js'
+
+const opts = {
+  show: Boolean(process.env.SHOW),
+  dryRun: Boolean(process.env.DRY),
+  update: Boolean(process.env.UPDATE),
+  ci: Boolean(process.env.CI),
+  useRelativePath: Boolean(config.useRelativePath),
+}
+```
+
 
 ## Advanced use
 
@@ -274,6 +301,8 @@ lots of other ones, blog posts and slides on this topic.
 
 [snap-shot-core]: https://github.com/smartprix/snap-shot-core
 
+## Original Author and License:
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
@@ -287,7 +316,7 @@ License: MIT - do anything with the code, but don't blame me if it does not work
 Support: if you find any problems with this module, email / tweet /
 [open issue](https://github.com/bahmutov/snap-shot-it/issues) on Github
 
-## MIT License
+### MIT License
 
 Copyright (c) 2017 Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt;
 
@@ -312,10 +341,10 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-[npm-icon]: https://nodei.co/npm/snap-shot-it.svg?downloads=true
-[npm-url]: https://npmjs.org/package/snap-shot-it
-[ci-image]: https://travis-ci.org/bahmutov/snap-shot-it.svg?branch=master
-[ci-url]: https://travis-ci.org/bahmutov/snap-shot-it
+[npm-icon]: https://nodei.co/npm/@smpx/snap-shot-it.svg?downloads=true
+[npm-url]: https://npmjs.org/package/@smpx/snap-shot-it
+[ci-image]: https://travis-ci.org/smartprix/snap-shot-it.svg?branch=master
+[ci-url]: https://travis-ci.org/smartprix/snap-shot-it
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg

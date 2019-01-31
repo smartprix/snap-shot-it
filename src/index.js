@@ -14,7 +14,7 @@ const packageFile = require(path.join(process.cwd(), 'package.json'))
 const config = packageFile['snap-shot-it'] || {}
 
 debug('loading snap-shot-it')
-const EXTENSION = '.js'
+const EXTENSION = config.extension || '.js'
 
 // all tests we have seen so we can prune later
 const seenSpecs = []
@@ -130,6 +130,7 @@ function snapshot (value) {
     dryRun: Boolean(process.env.SNAPSHOT_DRY),
     update: Boolean(process.env.SNAPSHOT_UPDATE),
     ci: Boolean(process.env.CI),
+    resultsDir: String(config.resultsDir),
     useRelativePath: Boolean(config.useRelativePath)
   }
   const snap = {

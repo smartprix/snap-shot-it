@@ -1,7 +1,7 @@
 {
   "name": "@smpx/snap-shot-it",
   "description": "Smarter snapshot utility for Mocha and BDD test runners",
-  "version": "6.3.1",
+  "version": "6.4.0",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": "https://github.com/smartprix/snap-shot-it/issues",
   "types": "src/index.d.ts",

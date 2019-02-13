@@ -10,7 +10,15 @@ const { hasOnly, hasFailed } = require('has-only')
 const pluralize = require('pluralize')
 const path = require('path')
 
-const packageFile = require(path.join(process.cwd(), 'package.json'))
+// eslint-disable-next-line immutable/no-let
+let packageFile;
+
+try {
+  packageFile = require(path.join(process.cwd(), 'package.json'))
+}
+catch(err) {
+  packageFile = {};
+}
 const config = packageFile['snap-shot-it'] || {}
 
 debug('loading snap-shot-it')

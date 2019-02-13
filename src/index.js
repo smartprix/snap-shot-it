@@ -5,6 +5,7 @@ const { core, restore, prune } = require('@smpx/snap-shot-core')
 const compare = require('snap-shot-compare')
 const { isDataDriven, dataDriven } = require('@bahmutov/data-driven')
 const { isNamedSnapshotArguments } = require('./named-snapshots')
+const { isChunkedSnapshotArguments } = require('./chunked-snapshots')
 const R = require('ramda')
 const { hasOnly, hasFailed } = require('has-only')
 const pluralize = require('pluralize')
@@ -19,6 +20,7 @@ try {
 catch(err) {
   packageFile = {};
 }
+
 const config = packageFile['snap-shot-it'] || {}
 
 debug('loading snap-shot-it')
@@ -108,6 +110,8 @@ function snapshot (value) {
   const fullTitle = getTestTitle(currentTest)
   debug('snapshot in test "%s"', fullTitle)
   debug('from file "%s"', currentTest.file)
+  // eslint-disable-next-line immutable/no-let
+  let file = currentTest.file
 
   // eslint-disable-next-line immutable/no-let
   let savedTestTitle = fullTitle
@@ -125,8 +129,21 @@ function snapshot (value) {
     value = arguments[1]
     debug('named snapshots "%s"', savedTestTitle)
     addToPrune({
-      file: currentTest.file,
+      file,
       specName: savedTestTitle
+    })
+  } else if (isChunkedSnapshotArguments(arguments)) {
+    if (arguments[0].title) savedTestTitle = arguments[0].title
+    const chunk = arguments[0].chunk
+    if (chunk) {
+      const parsedPath = path.parse(currentTest.file)
+      file = `${path.join(parsedPath.dir, parsedPath.name + '.' + chunk + parsedPath.ext)}`
+      savedTestTitle += ` [${chunk}]`
+    }
+    value = arguments[1]
+    addToPrune({
+      file,
+      specName: savedTestTitle,
     })
   } else {
     debug('snapshot value %j', value)
@@ -143,7 +160,7 @@ function snapshot (value) {
   }
   const snap = {
     what: value,
-    file: currentTest.file,
+    file,
     ext: EXTENSION,
     compare,
     opts

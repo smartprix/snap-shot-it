@@ -17,6 +17,7 @@
         "npm run test-two-specs",
         "npm run ts-demo",
         "npm run coffee-demo",
+        "npm run chunked-demo",
         "git add src/*.js",
         "npm run ban"
       ],

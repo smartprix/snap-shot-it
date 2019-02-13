@@ -12,13 +12,12 @@ const pluralize = require('pluralize')
 const path = require('path')
 
 // eslint-disable-next-line immutable/no-let
-let packageFile;
+let packageFile
 
 try {
   packageFile = require(path.join(process.cwd(), 'package.json'))
-}
-catch(err) {
-  packageFile = {};
+} catch (err) {
+  packageFile = {}
 }
 
 const config = packageFile['snap-shot-it'] || {}
@@ -137,13 +136,16 @@ function snapshot (value) {
     const chunk = arguments[0].chunk
     if (chunk) {
       const parsedPath = path.parse(currentTest.file)
-      file = `${path.join(parsedPath.dir, parsedPath.name + '.' + chunk + parsedPath.ext)}`
+      file = `${path.join(
+        parsedPath.dir,
+        parsedPath.name + '.' + chunk + parsedPath.ext
+      )}`
       savedTestTitle += ` [${chunk}]`
     }
     value = arguments[1]
     addToPrune({
       file,
-      specName: savedTestTitle,
+      specName: savedTestTitle
     })
   } else {
     debug('snapshot value %j', value)

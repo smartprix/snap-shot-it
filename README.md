@@ -133,7 +133,7 @@ You can update snapshot values
 SNAPSHOT_UPDATE=1 npm test
 ```
 
-## Named snapshots
+## Named snapshots: [Named-demo](./named-demo)
 
 Renaming tests might lead to confusion and pruning snapshots. You can name the snapshots
 yourself
@@ -150,6 +150,43 @@ exports['my name'] = 42
 ```
 
 **Note** you should make sure that the name is unique per spec file.
+
+## Chunked snapshots: [Chunked-demo](./chunked-demo)
+
+If you have lots of tests in  a single file and you want to break down the snapshots into chunks. You can specifiy a `chunk` parameter.
+
+```js
+// File: specs.test.js
+const someIdentifier = 'type1'
+snapshot({chunk: someIdentifier}, value)
+```
+
+**The snapshots will then be saved in file `specs.type1.test.js` in the `__snapshots__` dir**
+
+You can use named snapshots along with chunked snapshots:
+
+```js
+// File: specs.test.js
+const someIdentifier = 'type1'
+snapshot({title: 'my name', chunk: someIdentifier}, value)
+
+const otherIdentifier = 'type2'
+snapshot({title: 'my name', chunk: otherIdentifier}, value)
+```
+
+The snapshots will then be saved as:
+
+```js
+// File: __snapshots__/specs.type1.test.js
+exports['my name [type1]'] = 42
+```
+
+```js
+// File: __snapshots__/specs.type2.test.js
+exports['my name [type2]'] = 42
+```
+
+The chunk is automatically added to the title so need to do that.
 
 ## Pruning
 

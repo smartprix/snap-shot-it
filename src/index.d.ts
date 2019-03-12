@@ -26,7 +26,7 @@ declare namespace snapshot {
   ```
  */
 
-declare function snapshot(value: {}): void;
+declare function snapshot(value: any): void;
 /**
  * Saves value using given name, instead of computing the name from
  * the test title and snapshot index.
@@ -44,7 +44,27 @@ declare function snapshot(value: {}): void;
 
  * **Note:** you should make sure that the name is unique per spec file.
  */
-declare function snapshot(name: string, value: {}): void;
+declare function snapshot(name: string, value: any): void;
+
+/**
+ * Saves value to a chunked file, use this to group snapshots into a seperate file
+ * Optionally specifiy title along with it.
+ *
+ * @see https://github.com/smartprix/snap-shot-it#chunked-snapshots
+ * @example
+ *
+  ```
+  const snapshot = require('@smpx/snap-shot-it')
+  const value = 42
+  const someIdentifier = 'type1'
+  snapshot({chunk: someIdentifier}, value)
+  // File: __snapshots__/specs.type1.test.js
+  exports['my name [type1]'] = 42
+  ```
+
+  * **Note:** No need to add chunk to title as it will be automatically added
+ */
+declare function snapshot(options: {title?: string, chunk: string}, value: any): void;
 
 /**
  * Data-driven testing. Pass a single unary function and multiple arguments,

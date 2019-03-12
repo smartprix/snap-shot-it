@@ -6,11 +6,11 @@ declare namespace snapshot {
  * If the value with matching name already exists, and the new value is
  * different, throws an error.
  *
- * @see https://github.com/bahmutov/snap-shot-it#use
+ * @see https://github.com/smartprix/snap-shot-it#use
  * @example
  *
   ```
-  const snapshot = require('snap-shot-it')
+  const snapshot = require('@smpx/snap-shot-it')
   describe('example', () => {
     it('works', () => {
       snapshot(add(10, 20))
@@ -31,11 +31,11 @@ declare function snapshot(value: {}): void;
  * Saves value using given name, instead of computing the name from
  * the test title and snapshot index.
  *
- * @see https://github.com/bahmutov/snap-shot-it#named-snapshots
+ * @see https://github.com/smartprix/snap-shot-it#named-snapshots
  * @example
  *
   ```
-  const snapshot = require('snap-shot-it')
+  const snapshot = require('@smpx/snap-shot-it')
   const value = 42
   snapshot('my name', value)
   // expected snapshot file
@@ -51,7 +51,7 @@ declare function snapshot(name: string, value: {}): void;
  * and function will be called with each argument separately, then results will
  * be stored as a snapshot.
  *
- * @see https://github.com/bahmutov/snap-shot-it#data-driven-testing
+ * @see https://github.com/smartprix/snap-shot-it#data-driven-testing
  * @example
  *
   ```
@@ -92,7 +92,7 @@ declare function snapshot(name: string, value: {}): void;
 declare function snapshot<T>(fn: (arg: T) => any, ...fnArgs: T[]): void;
 /**
  * Data-driven testing for a function with multiple arguments.
- * @see https://github.com/bahmutov/snap-shot-it#data-driven-testing
+ * @see https://github.com/smartprix/snap-shot-it#data-driven-testing
  * @example
   ```
   const add = (a, b) => a + b

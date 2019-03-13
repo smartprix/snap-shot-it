@@ -380,8 +380,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 [npm-icon]: https://nodei.co/npm/@smpx/snap-shot-it.svg?downloads=true
 [npm-url]: https://npmjs.org/package/@smpx/snap-shot-it
-[ci-image]: https://travis-ci.org/smartprix/snap-shot-it.svg?branch=master
-[ci-url]: https://travis-ci.org/smartprix/snap-shot-it
+[ci-image]: https://travis-ci.com/smartprix/snap-shot-it.svg?branch=master
+[ci-url]: https://travis-ci.com/smartprix/snap-shot-it
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg

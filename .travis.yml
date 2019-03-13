@@ -13,8 +13,9 @@ script:
   - DEBUG=snap-shot-it npm run test-two-specs
   - npm run ts-demo
   - npm run coffee-demo
-after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
+  - npm run chunked-demo
+# after_success:
+#   - npm run travis-deploy-once "npm run semantic-release"
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

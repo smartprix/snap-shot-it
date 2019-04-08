@@ -152,13 +152,15 @@ function snapshot (value) {
     addToPrune(getTestInfo(currentTest))
   }
 
+  // grab options from environment variables
   const opts = {
     show: Boolean(process.env.SNAPSHOT_SHOW),
     dryRun: Boolean(process.env.SNAPSHOT_DRY),
     update: Boolean(process.env.SNAPSHOT_UPDATE),
     ci: Boolean(process.env.CI),
     resultsDir: String(config.resultsDir),
-    useRelativePath: Boolean(config.useRelativePath)
+    useRelativePath: Boolean(config.useRelativePath),
+    sortSnapshots: !process.env.SNAPSHOT_SKIP_SORTING
   }
   const snap = {
     what: value,

@@ -31,10 +31,11 @@ function _pruneSnapshots () {
   debug('pruning snapshots')
   debug('seen %s', pluralize('spec', seenSpecs.length, true))
   debug(seenSpecs)
-  prune(
-    { tests: seenSpecs, ext: EXTENSION },
-    { useRelativePath: Boolean(config.useRelativePath) }
-  )
+  const opts = {
+    useRelativePath: Boolean(config.useRelativePath),
+    sortSnapshots: !process.env.SNAPSHOT_SKIP_SORTING
+  }
+  prune({ tests: seenSpecs, ext: EXTENSION }, opts)
 
   // eslint-disable-next-line immutable/no-mutation
   seenSpecs.length = 0
